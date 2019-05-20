@@ -9,8 +9,8 @@ RUN apk add --no-cache --update alpine-sdk \
     git \
     make \
     gcc \
-&&  git clone https://github.com/lightningnetwork/lnd /go/src/github.com/lightningnetwork/lnd \
-&&  cd /go/src/github.com/lightningnetwork/lnd \
+&&  git clone https://github.com/decred/dcrlnd /go/src/github.com/decred/dcrlnd \
+&&  cd /go/src/github.com/decred/dcrlnd \
 &&  make \
 &&  make install
 
@@ -26,8 +26,8 @@ RUN apk --no-cache add \
     ca-certificates
 
 # Copy the binaries from the builder image.
-COPY --from=builder /go/bin/lncli /bin/
-COPY --from=builder /go/bin/lnd /bin/
+COPY --from=builder /go/bin/dcrlncli /bin/
+COPY --from=builder /go/bin/dcrlnd /bin/
 
 # Expose lnd ports (p2p, rpc).
 EXPOSE 9735 10009
